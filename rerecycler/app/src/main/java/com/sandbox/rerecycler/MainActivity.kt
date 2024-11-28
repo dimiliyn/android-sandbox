@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sandbox.rerecycler.databinding.ActivityMainBinding
 import com.sandbox.rerecycler.entity.City
 import com.sandbox.rerecycler.entity.Country
+import com.sandbox.rerecycler.ui.CityGalleryAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,11 +32,16 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
+    private val cityListAdapter: CityGalleryAdapter = CityGalleryAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         _vb = ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
+
+        vb.listCities.adapter = cityListAdapter
+        cityListAdapter.submitList(listToShow[0].cities)
+
+//        enableEdgeToEdge()
         setContentView(vb.root)
 
 
