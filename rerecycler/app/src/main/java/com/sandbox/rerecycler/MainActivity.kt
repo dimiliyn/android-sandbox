@@ -7,6 +7,7 @@ import com.sandbox.rerecycler.databinding.ActivityMainBinding
 import com.sandbox.rerecycler.entity.City
 import com.sandbox.rerecycler.entity.Country
 import com.sandbox.rerecycler.ui.CityGalleryAdapter
+import com.sandbox.rerecycler.ui.CountryGalleryAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val cityListAdapter: CityGalleryAdapter = CityGalleryAdapter()
+    private val countryListAdapter: CountryGalleryAdapter = CountryGalleryAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,9 @@ class MainActivity : AppCompatActivity() {
 
         vb.listCities.adapter = cityListAdapter
         cityListAdapter.submitList(listToShow[0].cities)
+
+        vb.listCountries.adapter = countryListAdapter
+        countryListAdapter.submitList(listToShow)
 
 //        enableEdgeToEdge()
         setContentView(vb.root)
