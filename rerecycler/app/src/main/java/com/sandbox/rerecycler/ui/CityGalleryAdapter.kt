@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.sandbox.rerecycler.databinding.CityholderBinding
 import com.sandbox.rerecycler.entity.City
+import com.sandbox.rerecycler.entity.RecyclerResponse
 
-class CityGalleryAdapter: ListAdapter<City, CityViewHolder>(CityComparator()) {
+class CityGalleryAdapter(private val onClick: (RecyclerResponse) -> Unit) :
+    ListAdapter<City, CityViewHolder>(CityComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val cityBinding = CityholderBinding.inflate(LayoutInflater.from(parent.context))
         return CityViewHolder(cityBinding = cityBinding)
@@ -17,5 +19,11 @@ class CityGalleryAdapter: ListAdapter<City, CityViewHolder>(CityComparator()) {
         holder.cityBinding.cityName.text = city.name
         // holder.cityBinding.cityPopulation.text = city.population.toString()
         holder.cityBinding.cityPopulation.text = String.format(city.population.toString())
+
+        holder.cityBinding.root.setOnClickListener {
+            city?.let {
+                onClick(RecyclerResponse.RespCity(city))
+            }
+        }
     }
 }
